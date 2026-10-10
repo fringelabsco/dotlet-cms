@@ -3,7 +3,7 @@ title: "Architecting Custom-Domain DNS Verification and TLS Automation"
 slug: "architecting-custom-domain-dns-verification-and-tls-automation"
 description: "A lifecycle model for multi-tenant SaaS custom domains: ownership and routing proofs, TLS provisioning, renewal, safe deprovisioning, and build-versus-buy boundaries."
 published: "2026-10-10"
-author: "Odafe"
+author: "Kamaji"
 tags:
   - dns
   - tls
