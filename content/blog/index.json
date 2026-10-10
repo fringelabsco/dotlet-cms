@@ -1,0 +1,15 @@
+[
+  {
+    "title": "Introducing the Dotlet blog",
+    "slug": "hello-world",
+    "description": "Product updates, announcements, and technical deep-dives on custom domain infrastructure.",
+    "published": "2026-10-10",
+    "author": "Odafe",
+    "tags": [
+      "announcements",
+      "dotlet"
+    ],
+    "cover": null,
+    "readingTime": 1
+  }
+]

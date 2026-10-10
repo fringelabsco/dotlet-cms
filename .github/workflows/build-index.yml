@@ -1,0 +1,57 @@
+name: Build blog index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**/*.md'
+      - 'scripts/**'
+      - '.github/workflows/build-index.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-index
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install --no-audit --no-fund
+
+      - run: npm run build:index
+
+      - name: Commit index.json if changed
+        run: |
+          if git diff --quiet -- content/blog/index.json; then
+            echo "index.json unchanged"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add content/blog/index.json
+            git commit -m "chore: rebuild blog index"
+            git push
+          fi
+
+      - name: Purge jsDelivr cache
+        run: |
+          BASE="https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@main"
+          FILES="content/blog/index.json"
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'content/**' 2>/dev/null || true)
+          if [ -z "$CHANGED" ]; then CHANGED=$(git ls-files 'content/**'); fi
+          FILES="$FILES $CHANGED"
+          for f in $(echo $FILES | tr ' ' '\n' | sort -u); do
+            echo "Purging $f"
+            curl -fsS "$BASE/$f" > /dev/null || echo "  (purge failed for $f)"
+          done
