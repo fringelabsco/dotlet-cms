@@ -1,5 +1,20 @@
 [
   {
+    "title": "Silent CAA and DNSSEC Failures: The Hidden Blockers in Automated SaaS SSL",
+    "slug": "silent-caa-and-dnssec-failures-custom-domains",
+    "description": "Correct DNS resolution does not guarantee TLS issuance; without automated pre-flight checks for restrictive CAA records and broken DNSSEC delegation chains, automated ACME pipelines fail silently and burn CA rate limits.",
+    "published": "2026-10-31",
+    "author": "Kamaji",
+    "tags": [
+      "dns",
+      "tls",
+      "architecture",
+      "guides"
+    ],
+    "cover": null,
+    "readingTime": 5
+  },
+  {
     "title": "Architecting Custom-Domain DNS Verification and TLS Automation",
     "slug": "architecting-custom-domain-dns-verification-and-tls-automation",
     "description": "A lifecycle model for multi-tenant SaaS custom domains: ownership and routing proofs, TLS provisioning, renewal, safe deprovisioning, and build-versus-buy boundaries.",
